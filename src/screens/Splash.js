@@ -1,6 +1,7 @@
 import React,{useEffect} from 'react';
 import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
 import splashScreen from '../assets/images/splash2.jpeg'
+import loGo from '../assets/images/Vacatime1.png'
 
 const Splash=()=>{
 
@@ -10,7 +11,7 @@ const Splash=()=>{
                 source={splashScreen}
                 style={styles.imageStyle}>
                     <View style={styles.bgImage}>
-                        <Image source={{uri:'https://i.ibb.co/Q6TGfwB/Vacatime1.png'}}
+                        <Image source={loGo}
                         style={styles.logo}>
 
                         </Image>

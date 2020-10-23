@@ -9,6 +9,7 @@ import {
 import {Thumbnail} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome' 
 import instaBG from '../assets/images/InstaBG.jpg'
+import logo from '../assets/images/Vacatime1.png'
 
 import FB from '../assets/icons/logoFB.png';
 import IG from '../assets/icons/logoIG.png';
@@ -45,7 +46,7 @@ export default class About extends Component {
         return(
             <View style={styles.container}>
                 <View style={styles.logoStyle}>
-                <Thumbnail square large source={{uri:'https://i.ibb.co/Q6TGfwB/Vacatime1.png'}}/> 
+                <Thumbnail square large source={logo}/> 
                 <Text style={{fontSize:20}}>
                     Your Travel Buddy!
                 </Text>

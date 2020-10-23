@@ -7,8 +7,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {Item, Input, Form, Button, Thumbnail, Text, Label} from 'native-base';
+
 import * as screenNames from '../navigation/screenNames';
 import SessionManager from '../data/SessionManager';
+import bg from '../assets/images/loadb.jpg'
+import loGo from '../assets/images/Vacatime1.png'
+
 const axios = require('axios').default;
 
 interface Prop {}
@@ -48,7 +52,7 @@ class RegistrationForm extends React.Component<Prop,State>{
       alert('password harus di isi');
       return;
     }
-    this.submitRegister();
+    //this.submitRegister();
     try {
      const session = {
      username: username,
@@ -56,80 +60,86 @@ class RegistrationForm extends React.Component<Prop,State>{
          password: password,
        };
        await SessionManager.storeSession(session);
-       //this.props.navigation.navigate(screenNames.HOME_SCREEN);
+       this.props.navigation.navigate(screenNames.HOME_SCREEN);
      } catch (e) {
        console.log(e);
       }
-  //    const request_Headers = {
-  //      method: 'GET',
-  //      headers: {
-  //        'Content-Type': 'application/json',
-  //        'Cache-Control': 'no-cache, no-store, must-revalidate',
-  //        Pragma: 'no-cache',
-  //        Expires: 0,
-  //      },
-  //      body: JSON.stringify({
-  //        username: this.state.username,
-  //        email: this.state.email,
-  //        password: this.state.password,
-  //      }),
-  //    };
-  //    const request_UserURL = 'https://pokeapi.co/api/v2/pokemon?limit=100&offset=200';
-  //    const response = await fetch(request_UserURL, request_Headers)
-  //      .then((res) => res.json())
-  //      .then((res) => console.log('beres', res))
-  //      .catch((error) => console.log(error));
-  //    console.log(response);
+     const request_Headers = {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+         'Cache-Control': 'no-cache, no-store, must-revalidate',
+         'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM1Mzg4MTMsImlhdCI6MTYwMzQ1ODgxM30.L2MzkDugoCUwahYaBHOH-6c_rsBR2DOipLvfTKM_i2aT93cx489_CT8y569u8INl3Z3anY4Fw8BJi0pJqmulsA',
+         Pragma: 'no-cache',
+         Expires: 0,
+       },
+       body: JSON.stringify({
+         username: this.state.username,
+         email: this.state.email,
+         password: this.state.password,
+       }),
+     };
+     const request_UserURL = 'https://vacatimeapplication.herokuapp.com/customers';
+     const response = await fetch(request_UserURL, request_Headers)
+       .then((res) => res.json())
+       .then((error) => console.log('apa',error))
+       .then((res) => console.log('beres', res))
+       .catch((error) => console.log(error));
+     console.log(response);
    };
 
-  submitRegister = () => {
-    const {username, email, password} = this.state;
-    this.setState({isLoading: true});
-    let headers = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
-      }),
-    };
+  // submitRegister = async () => {
+  //   const session = {username, email, password} = this.state;
+  //   this.setState({isLoading: true});
+  //   let headers = {
+  //     method: 'POST',      
+  //     headers: {
+  //       Accept: 'application/json',
+  //       'Content-Type': 'application/json',
+  //       'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM1MjQ4NzgsImlhdCI6MTYwMzQ0NDg3OH0.OAaw5kCrXx_cke7P6hV_1LyidlqU2LB-x7Vo8TFTqhsJ-NDMTrg7YuUAlCjNLb8p2hWsC6Ei0pEF6Ski8W3Hlw',
+  //     },
+  //     body: JSON.stringify({
+  //       username: username,
+  //       email: email,
+  //       password: password,
+  //     },
 
-    /**
-     *  output format response
-     *  {status: true, message: 'success login', data: {username: 'test', email: 'test@mail'}}
-     *  atau di dalam data bisa di masukan token bearier
-     */
-    const url = 'http://127.0.0.1:8080/customers';
-    console.log('url',url);
-    console.log('header fetch', headers);
-    fetch(url,headers)
-      .then(response => response.json())
-      .then(result => {
-        console.log('=====> =====>result', result);
-        if (result.status === true) {
-          let session = {
-            username: username,
-            password: password,
-          };
-          this.storeSession(session);
-         // this.props.navigation.navigate(screenNames.HOME_SCREEN);
-        } else {
-          this.setState({isLoading: false});
-          alert('login gagal');
-        }
-        console.log('Response berhasil',result);
-      })
-      .catch((error) => {
-        console.log('<====== <======== Error',error);
-      })
-      .finally(() => {
-        this.setState({isLoading: false});
-      });
-  };
+
+      
+  //   };
+
+  //   /**
+  //    *  output format response
+  //    *  {status: true, message: 'success login', data: {username: 'test', email: 'test@mail'}}
+  //    *  atau di dalam data bisa di masukan token bearier
+  //    */
+  //   const url = 'https://vacatimeapplication.herokuapp.com/customers';
+  //   console.log('url',url);
+  //   console.log('header fetch', headers);
+  //   fetch(url,headers)
+  //     .then(response => response.json())
+  //     .then(result => {
+  //       console.log('=====> =====>result', result);
+  //       if (result.status === true) {
+  //         let session = {
+  //           username: username,
+  //           password: password,
+  //           email: email,
+  //         };
+  //        this.props.navigation.navigate(screenNames.HOME_SCREEN);
+  //       } else {
+  //         this.setState({isLoading: false});
+  //         alert('FAIL');
+  //       }
+  //       console.log('Response berhasil',result);
+  //     })
+  //     .catch((error) => {
+  //       console.log('<====== <======== Error',error);
+  //     })
+  //     .finally(() => {
+  //       this.setState({isLoading: false});
+  //     });
+  // };
 
   storeSession = async (session) => {
     await SessionManager.storeSession(session);
@@ -154,13 +164,13 @@ class RegistrationForm extends React.Component<Prop,State>{
       <View style={styles.containerStyle}>
         <Image
           style={styles.bgImageStyle}
-          source={{uri: 'https://i.ibb.co/7k5Nd0H/loadb.jpg'}}
+          source={bg}
         />
         <View style={styles.logoStyle}>
           <Thumbnail
             square
             large
-            source={{uri: 'https://i.ibb.co/Q6TGfwB/Vacatime1.png'}}
+            source={loGo}
           />
           <Text style={styles.textLogoStyle}>Your Travel Buddy!</Text>
         </View>

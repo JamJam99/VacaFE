@@ -16,7 +16,10 @@ import {
     Thumbnail,
     Text
 } from 'native-base';
+
 import * as screenNames from '../navigation/screenNames'
+import bg from '../assets/images/loadb.jpg'
+import loGo from '../assets/images/Vacatime1.png'
 
 const Login = ({ navigation }) => {
     const [username, setusername] = React.useState('')
@@ -33,9 +36,9 @@ const Login = ({ navigation }) => {
     return (
         <View style={styles.containerStyle}>
 
-            <Image style={styles.bgImageStyle} source={{ uri: 'https://i.ibb.co/7k5Nd0H/loadb.jpg' }} />
+            <Image style={styles.bgImageStyle} source={bg} />
             <View style={styles.logoStyle}>
-                <Thumbnail square large source={{ uri: 'https://i.ibb.co/Q6TGfwB/Vacatime1.png' }} />
+                <Thumbnail square large source={loGo} />
                 <Text style={styles.textLogoStyle}>VacaTime</Text>
             </View>
             <Form style={styles.formLoginStyle}>
