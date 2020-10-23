@@ -7,15 +7,38 @@ import {
     Image
 } from 'react-native';
 import {Thumbnail} from 'native-base';
-import Details from './Details'
-
-import * as screenNames from '../navigation/screenNames'
+import Icon from 'react-native-vector-icons/FontAwesome' 
+import instaBG from '../assets/images/InstaBG.jpg'
 
 import FB from '../assets/icons/logoFB.png';
 import IG from '../assets/icons/logoIG.png';
 import WA from '../assets/icons/logoWA.png';
 import GM from '../assets/icons/logoLoc.png'
-import { Button } from 'react-native-paper';
+
+
+const myButton = (
+    <Icon.Button
+      name="facebook"
+      backgroundColor="#3b5998"
+      onPress={{}}
+    >
+        Vacatimeid
+    </Icon.Button>,
+    <Icon.Button
+    name="instagram"
+    backgroundColor= "purple"
+    onPress={{}}
+  >
+      Vacatime.id
+  </Icon.Button>,
+   <Icon.Button
+   name="whatsapp"
+   backgroundColor= "purple"
+   onPress={{}}
+ >
+     Vacatime.id
+ </Icon.Button>
+  );
 
 export default class About extends Component {
     render() {
@@ -45,28 +68,28 @@ export default class About extends Component {
                     More Further Info Contact US:
                 </Text>
                 <View style={{paddingBottom:5}}>
-                <View style={styles.iconPosition}>
-                    <Image style={styles.iconStyle} source={FB}/>
-                    <Text style={styles.textIcon}>
-                        Vacatimeid
+                <Icon.Button name="facebook" backgroundColor="#3b5998">
+                    <Text style={{ fontFamily: 'Arial', fontSize: 15, color: 'white' }}>
+                    Vacatimeid
                     </Text>
-                </View>
+                </Icon.Button>
                 </View >
                 <View style={{paddingBottom:5}}>
+                    <TouchableOpacity>
                 <View style={styles.iconPosition}>
                     <Image style={styles.iconStyle} source={IG}/>
-                    <Text style={styles.textIcon}>
+                    <Text style={{paddingLeft: 5}}>
                         Vacatime.id
                     </Text>
                 </View>
+                </TouchableOpacity>
                 </View>
                 <View style={{paddingBottom:5}}>
-                <View style={styles.iconPosition}>
-                    <Image style={styles.iconStyle} source={WA}/>
-                    <Text style={styles.textIcon}>
-                        +62 813 8686 4464
+                <Icon.Button name="whatsapp" backgroundColor="#25D366">
+                    <Text style={{ fontFamily: 'Arial', fontSize: 15, color: 'white' }}>
+                    +62 813 8686 4464
                     </Text>
-                </View>                
+                </Icon.Button>           
                 </View>
                 <View style={styles.iconPosition}>
                     <Image style={styles.iconStyle} source={GM}/>

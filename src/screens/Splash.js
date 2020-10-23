@@ -1,13 +1,13 @@
 import React,{useEffect} from 'react';
 import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
-import SplashScreen from 'react-native-splash-screen';
+import splashScreen from '../assets/images/splash2.jpeg'
 
 const Splash=()=>{
 
     
         return(
             <ImageBackground
-                source={{uri:'https://i.ibb.co/kyqP3jP/sunset-quotes-21-1586531574.jpg'}}
+                source={splashScreen}
                 style={styles.imageStyle}>
                     <View style={styles.bgImage}>
                         <Image source={{uri:'https://i.ibb.co/Q6TGfwB/Vacatime1.png'}}
@@ -17,7 +17,6 @@ const Splash=()=>{
                         <Text style={styles.textStyle}>
                             Your Travel Buddy!
                             </Text>
-                        
                     </View>
 
             </ImageBackground>
@@ -41,8 +40,13 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize:30, 
-        color:'white', 
-        fontWeight: 'bold'
+        color:'#FF672D', 
+        fontWeight: 'bold',
+        fontFamily:'sans-serif'
+    },
+    square: {
+        backgroundColor:'white',
+        opacity: 0.2
     }
 });
 

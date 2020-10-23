@@ -1,12 +1,16 @@
 import React from 'react';
-import {Text, View, TouchableOpacity,Modal} from 'react-native';
+import {Text, View, TouchableOpacity,Modal, StyleSheet} from 'react-native';
 
 const Payment = ({navigation}) => {
     const [isvisable,setisvisible]=React.useState(false)
   return (
     <>
-      <View>
-        <Text style={{margin: 10, fontSize: 30,alignSelf: 'center'}}>Payments</Text>
+      <View style={{flex:1}}>
+        <View style={{paddingTop: 20}}>
+        <View style={styles.borderTop}>
+        <Text style={{alignContent: 'center', fontSize: 30, color:'white', fontWeight:'700'}}>Payments</Text>
+        </View>
+        </View>
         <TouchableOpacity
         activeOpacity={0.5}
         >
@@ -126,3 +130,21 @@ const Payment = ({navigation}) => {
 };
 
 export default Payment;
+
+const styles = StyleSheet.create({
+  marginDivider: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  borderTop:{
+    width: 200, 
+    height: 50, 
+    borderColor:'#FF1B2D', 
+    borderWidth: 2, 
+    alignItems:'center',
+    borderTopRightRadius:20,    
+    borderBottomRightRadius:20,
+    backgroundColor:'#FF1B2D',
+    
+  }
+})

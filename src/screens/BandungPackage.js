@@ -30,48 +30,48 @@ const BandungPackage = ({navigation, route}) => {
   const item = route.params.item;
   const [date, setDate] = React.useState(today);
 
-  const toBookingScreen = async () => {
-    const checkLogin = await AsyncStorage.getItem('LOGGED_IN')
-    if (checkLogin === null) {
-      Alert.alert(
-        'You must login first!', 
-        'Please login first before you do a booking',
-        [
-          {
-            text: 'Login',
-            onPress: () => navigation.dispatch(jumpToLogin)
-          },
-          {
-            text: 'Cancel',
-            onPress: () => console.log('cancel'),
-            style: 'cancel'
-          }
-        ])
-    } else {
+   const toBookingScreen = async () => {
+  //   const checkLogin = await AsyncStorage.getItem('LOGGED_IN')
+  //   if (checkLogin === null) {
+  //     Alert.alert(
+  //       'You must login first!', 
+  //       'Please login first before you do a booking',
+  //       [
+  //         {
+  //           text: 'Login',
+  //           onPress: () => navigation.dispatch(jumpToLogin)
+  //         },
+  //         {
+  //           text: 'Cancel',
+  //           onPress: () => console.log('cancel'),
+  //           style: 'cancel'
+  //         }
+  //       ])
+  //   } else {
       navigation.navigate(screenName.BOOKING_SCREEN, {
         date,
         item
       })
     }
-  }
+ // PRICE PAKAI textDecorationLine "line-through"
 
   return (
     <ScrollView style={styles.containerStyle}>
       <View style={{backgroundColor: 'white'}}>
-        <View style={{width: 410, height: 220, marginTop: 10}} >
+        <View style={{width: 410, height: 220, justifyContent:'flex-end'}} >
           <ScrollView pagingEnabled horizontal>
             {item.images.map((image, index) => (
               <View key={String(index)} style={{position:'relative', width: 410, alignItems: 'center'}}>
                 <Image
                   source={{uri: image}}
-                  style={{width: 400, height: 200, margin: 2, borderRadius: 10}}
+                  style={{width: 410, height: 220}}
                 />
                 <View
                   style={{
                     flexDirection: 'row',
                     position: 'absolute',
                     bottom: 10,
-                    left: 160,
+                    left: 180,
                   }}>
                   {item.images.map((data, i) => (
                     <Text
@@ -88,7 +88,7 @@ const BandungPackage = ({navigation, route}) => {
           </ScrollView>
         </View>
         <View style={{paddingTop: 20}}></View>
-        <View style={{alignItems:'center'}}>        
+        <View>        
           <Text style={styles.pointing}>{item.title}</Text>
           </View>
           <View style={styles.borderTop}>
@@ -171,17 +171,7 @@ const BandungPackage = ({navigation, route}) => {
             </View>
 
             <TouchableOpacity
-              style={{
-                borderWidth: 0.5,
-                elevation: 2,
-                borderRadius: 3,
-                backgroundColor: '#FF9800',
-                width: 150,
-                height: 40,
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: 60,
-              }}
+              style={styles.bookingButton}
               onPress={toBookingScreen}>
               <Text style={{fontSize: 18,color:'white', fontWeight:'bold'}}>Book</Text>
             </TouchableOpacity>
@@ -191,14 +181,9 @@ const BandungPackage = ({navigation, route}) => {
         </View>
     </ScrollView>
   );
-};
+            }
 
 const styles = StyleSheet.create({
-  header: {
-    height: 40,
-    marginLeft: -20,
-    backgroundColor: '#FFCA28',
-  },
   headerText: {
     fontSize: 25,
     alignItems: 'center',
@@ -209,8 +194,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     paddingBottom: 20,
-    alignItems:'center',
-    color:'#9E952E'
+    left:1,
+    color:'black',
   },
 
   poin: {
@@ -247,6 +232,18 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     paddingTop: 7,
     borderRadius:50,
+  },
+  bookingButton: {    
+    borderWidth: 0.5,
+    elevation: 1,
+    borderRadius: 3,
+    backgroundColor: '#FF9800',
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 30,
+    borderColor: '#FF9800'
   }
 });
 

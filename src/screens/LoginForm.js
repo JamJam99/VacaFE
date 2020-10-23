@@ -47,7 +47,7 @@ const Login = ({ navigation }) => {
                 </Item>
                 <Item floatingLabel>
                     <Label>
-                        <Text style={styles.inputStyle}>Passowrd</Text>
+                        <Text style={styles.inputStyle}>Password</Text>
                     </Label>
                     <Input style={styles.inputStyle} secureTextEntry={true} onChangeText={(value) => setpassword(value)} />
                 </Item>

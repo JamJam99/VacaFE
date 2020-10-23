@@ -22,8 +22,8 @@ const Tab = createMaterialBottomTabNavigator();
 const TabBottom = () => {
     return (
         <Tab.Navigator
-            activeColor="green"
-            inactiveColor="black"
+            activeColor="#FF1B2D"
+            inactiveColor="white"
             barStyle={{ backgroundColor: '#ffc845' }}>
             <Tab.Screen name="Home" component={AppStack}
                 options={{

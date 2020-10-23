@@ -46,73 +46,52 @@ class Booking extends React.Component {
     }
     return (
       <View style={{flex: 1}}>
-        <Text style={{margin: 10, fontSize: 30}}>Bookings</Text>
+        <View style={{paddingTop: 25, paddingBottom: 20}}>
+        <View style={styles.borderTop}>
+        <Text style={{alignContent: 'center', fontSize: 30, color:'white', fontWeight:'700'}}>Booking</Text></View>
+        </View>
         <View
-          style={{
-            marginHorizontal: 16,
-            borderWidth: 1,
-            borderRadius: 5,
-            shadowColor: '#000',
-            shadowOffset: {width: 0, height: 2},
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 2,
-            margin: 5,
-            padding: 10,
-            borderColor: '#7CC434',
-            backgroundColor: '#E6FFCD',
-          }}>
+          style={styles.border}>
           <View>
-            <Text style={{marginTop: 10, marginBottom: 10}}>
-              Detail Booking:
+            <Text style={
+              {
+                marginTop: 10,
+                marginBottom: 10,
+              fontSize:20,
+              color: 'orange',
+              fontWeight:'700',
+              borderBottomWidth: 5,
+              borderBottomColor:'orange' 
+             }
+            
+            }>
+              Booking Details
             </Text>
-            <Text style={styles.marginDivider}>Booking code:</Text>
-            <Text style={styles.marginDivider}>
-              Destination: {item.packageTitle}
-            </Text>
-            <Text style={styles.marginDivider}>Description: {item.des}</Text>
-
-            <Text style={styles.marginDivider}>Customer Data:</Text>
-            <Text style={styles.marginDivider}>Date: {date}</Text>
-            <Text style={styles.marginDivider}>Name: {user.username}</Text>
-            <Text style={styles.marginDivider}>Email: {user.email}</Text>
-            <Text style={styles.marginDivider} >
-                Price: 
-            </Text>
+            <View >            
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Name:</Text> <Text>{user.username}</Text></Text></View>
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Email:</Text><Text> {user.email}</Text></Text></View>
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Date:</Text>  <Text>{date}</Text></Text></View>
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Destination:</Text> {item.packageTitle}</Text></View>
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Description:</Text> {item.des}</Text></View>
+            <View style={styles.borderCustomer}><Text style={{marginBottom:10}}><Text style={styles.marginDivider}>Price:</Text> {item.price}</Text></View>
+            </View>
+           
           </View>
-        </View>
 
-        <View style={{margin: 8, alignItems: 'center'}}>
+        <View style={{top: 100, alignItems: 'center'}}>
           <TouchableOpacity
-            style={{
-              margin: 10,
-              borderRadius: 3,
-              elevation: 2,
-              backgroundColor: 'yellow',
-              width: 250,
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 40,
-              borderWidth: 0.5,
-            }}
+            style={styles.buttonPayment}
             onPress={() => navigation.navigate(PAYMENT_SCREEN)}>
-            <Text style={{fontSize: 18}}>Payment</Text>
+            <Text style={{fontSize: 18, fontWeight:'bold', color:'white' }}>Payment</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={{
-              borderWidth: 0.5,
-              elevation: 2,
-              borderRadius: 3,
-              backgroundColor: 'yellow',
-              width: 250,
-              height: 40,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            style={styles.buttonBack}
             onPress={() => navigation.goBack()}>
-            <Text style={{fontSize: 18}}>Back</Text>
+            <Text style={{fontWeight:'bold' ,fontSize: 18, color:'#FF9800'}}>Back</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      
       </View>
     );
   }
@@ -124,5 +103,62 @@ const styles = StyleSheet.create({
   marginDivider: {
     marginTop: 10,
     marginBottom: 10,
+    fontWeight:'bold',
+    marginRight: 10
   },
+  borderTop:{
+    width: 200, 
+    height: 50, 
+    borderColor:'#FF1B2D', 
+    borderWidth: 2, 
+    alignItems:'center',
+    borderTopRightRadius:20,    
+    borderBottomRightRadius:20,
+    backgroundColor:'#FF1B2D',  
+  },
+  borderCustomer: {
+      paddingTop:5,  
+      paddingLeft: 10, 
+      borderBottomWidth: 1, 
+      borderBottomColor: 'gray',
+      borderTopEndRadius: 5,
+      
+    
+  },
+  border: {
+    marginHorizontal: 20,    
+    width: 350,
+    height: 300,
+    borderRadius: 10,
+    shadowOpacity: 5,
+    shadowRadius: 2,
+    elevation: 5,
+    marginTop: 30,
+    padding: 10,
+    borderColor: '#E6FFCD',
+    backgroundColor: 'white',
+  },
+  buttonPayment: {
+    margin: 10,
+    borderRadius: 20,
+    elevation: 2,
+    backgroundColor: '#FF9800',
+    width: 250,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    borderColor: 'white'
+
+  },
+  buttonBack: {    
+    margin: 10,
+    borderRadius: 20,
+    elevation: 2,
+    backgroundColor: 'white',
+    width: 250,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 40,
+    borderColor: '#FF9800',
+  }
 });
