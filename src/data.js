@@ -83,7 +83,7 @@ export const product=[
       'https://ecs7.tokopedia.net/blog-tokopedia-com/uploads/2018/04/Blog_7-Kegiatan-Menarik-yang-Bisa-Dilakukan-di-Karimun-Jawa-696x360.jpg',
       'https://www.indobalitour.com/uploads/tour/tour_201903030318_SnorklingLempuyangTour.jpg',
     ],
-    title:'Snorkling in the Javasea',
+    title:'Snorkling in the Java Sea',
     des:'Full day Karimunjawa Package',
     price:'RP 350,000',
     headerTitle:'Karimunjawa',

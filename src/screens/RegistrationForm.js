@@ -12,11 +12,13 @@ import * as screenNames from '../navigation/screenNames';
 import SessionManager from '../data/SessionManager';
 import bg from '../assets/images/loadb.jpg'
 import loGo from '../assets/images/Vacatime1.png'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const axios = require('axios').default;
 
 interface Prop {}
 interface State {
+  token: string;
   username: string;
   email: string;
   password: string;
@@ -27,11 +29,15 @@ class RegistrationForm extends React.Component<Prop,State>{
   constructor() {
     super();
     this.state = {
+      token: null,
       username: null,
       email: null,
       password: null,
       isLoading: false,
     };
+  }
+  async componentDidMount(){
+    this.setState({...this.state, token: await AsyncStorage.getItem('token')});
   }
 
   handleChange = (value) => {
@@ -61,6 +67,8 @@ class RegistrationForm extends React.Component<Prop,State>{
        };
        await SessionManager.storeSession(session);
        this.props.navigation.navigate(screenNames.HOME_SCREEN);
+       this.props.navigation.navigate(screenNames.LOGIN_SCREEN);
+       
      } catch (e) {
        console.log(e);
       }
@@ -69,7 +77,7 @@ class RegistrationForm extends React.Component<Prop,State>{
        headers: {
          'Content-Type': 'application/json',
          'Cache-Control': 'no-cache, no-store, must-revalidate',
-         'Authorization' : 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqYXZhaW51c2UiLCJleHAiOjE2MDM1Mzg4MTMsImlhdCI6MTYwMzQ1ODgxM30.L2MzkDugoCUwahYaBHOH-6c_rsBR2DOipLvfTKM_i2aT93cx489_CT8y569u8INl3Z3anY4Fw8BJi0pJqmulsA',
+         'Authorization' : 'Bearer ' + this.state.token,         
          Pragma: 'no-cache',
          Expires: 0,
        },
@@ -81,8 +89,7 @@ class RegistrationForm extends React.Component<Prop,State>{
      };
      const request_UserURL = 'https://vacatimeapplication.herokuapp.com/customers';
      const response = await fetch(request_UserURL, request_Headers)
-       .then((res) => res.json())
-       .then((error) => console.log('apa',error))
+       .then((res) => res.json())       
        .then((res) => console.log('beres', res))
        .catch((error) => console.log(error));
      console.log(response);

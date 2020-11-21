@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -15,6 +15,8 @@ import SplashScreen from '../screens/Splash';
 import Payment from '../screens/Payment';
 import { MaterialCommunityIcons, Fontisto, AntDesign, Feather } from '../assets/icons/Icons';
 import { Header } from 'react-native-elements';
+import axios from 'axios'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -70,6 +72,19 @@ const AuthStack = () => {
 
 
 const AppStack = () => {
+    useEffect(() => {
+        axios.post('https://vacatimeapplication.herokuapp.com/authenticate', {
+            username: "javainuse",
+            password: "password"
+        })
+        .then(response => {
+            AsyncStorage.setItem('token', response.data.token)
+            console.warn("Ini token authorization: "+response.data.token);
+        })
+        .catch(err => {
+            throw err
+        })
+    }, [])
     return (
 
         <Stack.Navigator screenOptions={{ headerShown: false }}>

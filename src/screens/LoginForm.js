@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
     StyleSheet,
     View,
     TouchableOpacity,
     Image,
-    AsyncStorage
 } from 'react-native';
 
 import {
@@ -16,23 +15,66 @@ import {
     Thumbnail,
     Text
 } from 'native-base';
+import Axios from 'axios'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import * as screenNames from '../navigation/screenNames'
 import bg from '../assets/images/loadb.jpg'
 import loGo from '../assets/images/Vacatime1.png'
 
-const Login = ({ navigation }) => {
+const Login = ( props) => {
     const [username, setusername] = React.useState('')
     const [password, setpassword] = React.useState('')
+    const [token,settoken] = React.useState('')
 
-    const _Login = async ({ navigation }) => {
-        alert(`Username : ${username}\nPassword : ${password}`)
+    useEffect(()=> { 
+        getToken()
+    },[])
+    const getToken = async ()=> {
+        settoken(await AsyncStorage.getItem('token'))
+    }
+    const _Login = async () => {
+     //   alert(`Username : ${username}\nPassword : ${password}`)
         /**
-         * * Disini buat logic, ketika user press login dan result success dari server. Save indicator user login dengan AsyncStorage
+         * * Disini buat logic, ketika user pres s login dan result success dari server. Save indicator user login dengan AsyncStorage
          * * await AsyncStorage.setItem('LOGGED_IN', 'true')
          */
+        const request_Headers = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'authorization' : 'Bearer ' + token,
+              Pragma: 'no-cache',
+              Expires: 0,
+            },
+            body: JSON.stringify({
+              username: username,
+              password: password,
+            }),
+          };
+          
+          const request_UserURL = 'https://vacatimeapplication.herokuapp.com/customers';
+          const response = await fetch(request_UserURL, request_Headers)
+            .then((res) => {
+                res.json() 
+                props.navigation.navigate(screenNames.HOME_SCREEN);
+                setusername('')
+                setpassword('')
+            })            
+            .then((res) => { 
+                console.log('beres', res)
+                 setusername('')
+                 setpassword('')
+          })
+            .catch((error) => console.log(error));
+          console.log(response);
+        
     }
+console.log(token)
 
+
+        const {navigation} = props;
     return (
         <View style={styles.containerStyle}>
 
@@ -46,16 +88,16 @@ const Login = ({ navigation }) => {
                     <Label>
                         <Text style={styles.inputStyle}>Username</Text>
                     </Label>
-                    <Input style={styles.inputStyle} onChangeText={(value) => setusername(value)} />
+                <Input value={username} style={styles.inputStyle} onChangeText={(value) => setusername(value)} />
                 </Item>
                 <Item floatingLabel>
                     <Label>
                         <Text style={styles.inputStyle}>Password</Text>
                     </Label>
-                    <Input style={styles.inputStyle} secureTextEntry={true} onChangeText={(value) => setpassword(value)} />
+                    <Input value={password} style={styles.inputStyle} secureTextEntry={true} onChangeText={(value) => setpassword(value)} />
                 </Item>
             </Form>
-            <Button onPress={_Login} block info style={styles.footerBottomStyle}>
+            <Button onPress={()=>_Login()} block info style={styles.footerBottomStyle}>
                 <Text>Sign In</Text>
             </Button>
             <View style={styles.footerSignUpStyle}>
@@ -66,8 +108,8 @@ const Login = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
         </View>
-    )
-}
+    );
+    }
 
 
 
@@ -120,47 +162,47 @@ const styles = StyleSheet.create({
     },
     signUpStyle: {
         color: 'white',
-        fontSize: 15
+        fontSize: 15 
     }
 
 })
 
 export default Login;
 
- // setLoading(true);
-    // let headers = {
-    //   method: 'POST',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: password,
-    //   }),
-    // };
-    // useEffect(() => {
-    //   fetch('127.0.0.1:8080/customers', headers)
-    //     .then((response) => response.json())
-    //     .then((result) => {
-    //       if (result.status === true) {
-    //         let session = {
-    //           username: result.data.userName,
-    //           email: result.data.email,
-    //         };
-    //         this.storeSession(session);
-    //         setLoading(false);
-    //         this.props.navigation.navigate(screenNames.HOME_SCREEN);
-    //       } else {
-    //         setLoading(false);
-    //         alert('login gagal');
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //       setLoading(false);
-    //     })
-    //     .finally(() => {
-    //       this.setState({isLoading: false});
-    //     });
-    // });
+//  setLoading(true);
+//     let headers = {
+//       method: 'POST',
+//       headers: {
+//         Accept: 'application/json',
+//         'Content-Type': 'application/json',
+//       },
+//       body: JSON.stringify({
+//         username: username,
+//         password: password,
+//       }),
+//     };
+//     useEffect(() => {
+//       fetch('127.0.0.1:8080/customers', headers)
+//         .then((response) => response.json())
+//         .then((result) => {
+//           if (result.status === true) {
+//             let session = {
+//               username: result.data.userName,
+//               email: result.data.email,
+//             };
+//             this.storeSession(session);
+//             setLoading(false);
+//             this.props.navigation.navigate(screenNames.HOME_SCREEN);
+//           } else {
+//             setLoading(false);
+//             alert('login gagal');
+//           }
+//         })
+//         .catch((error) => {
+//           console.error(error);
+//           setLoading(false);
+//         })
+//         .finally(() => {
+//           this.setState({isLoading: false});
+//         });
+//     });

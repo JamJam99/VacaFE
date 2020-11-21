@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import {View, ImageBackground, Image, Text, StyleSheet} from 'react-native';
-import splashScreen from '../assets/images/splash2.jpeg'
+import splashScreen from '../assets/images/oren.jpg'
 import loGo from '../assets/images/Vacatime1.png'
 
 const Splash=()=>{
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize:30, 
-        color:'#FF672D', 
+        color:'white', 
         fontWeight: 'bold',
         fontFamily:'sans-serif'
     },

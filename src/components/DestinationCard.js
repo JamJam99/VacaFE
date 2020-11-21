@@ -20,7 +20,7 @@ const DestinationCard = ({
             <View style={styles.destinationDescription}>
                 <Text style={{fontSize: 20, textAlign:'right'}} numberOfLines={3}>{title}</Text>
                 <Text style={{fontSize: 12, paddingBottom:5 ,textAlign:'right'}} numberOfLines={3}>{subTitle}</Text>
-                <Text style={{fontSize: 15}} numberOfLines={3}>{price}</Text>
+                <Text style={{fontSize: 15, textAlign: 'right'}} numberOfLines={3}>{price}</Text>
             </View>
         </TouchableOpacity>
     )

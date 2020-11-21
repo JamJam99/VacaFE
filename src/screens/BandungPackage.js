@@ -193,9 +193,10 @@ const styles = StyleSheet.create({
   pointing: {
     fontSize: 25,
     fontWeight: 'bold',
-    paddingBottom: 20,
+    paddingBottom: 15,
     left:1,
     color:'black',
+    paddingLeft: 10
   },
 
   poin: {

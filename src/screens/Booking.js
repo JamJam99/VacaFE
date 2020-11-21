@@ -5,16 +5,19 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   StyleSheet,
+  Image,
+  BackHandler,
 } from 'react-native';
-import {PAYMENT_SCREEN} from '../navigation/screenNames';
+import * as screenNames from '../navigation/screenNames';
 import SessionManager from '../data/SessionManager';
+import bg from '../assets/images/oren.jpg'
 
 class Booking extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: true,
-      user: null,
+      user: null     
     };
   }
 
@@ -26,7 +29,8 @@ class Booking extends React.Component {
     try {
       this.setState({isLoading: true});
       let user = await SessionManager.getSession();
-      this.setState({isLoading: false, user: user});
+      this.setState({isLoading: false, user: user});      
+      
     } catch (e) {
       console.log(e);
       this.setState({isLoading: false});
@@ -46,6 +50,7 @@ class Booking extends React.Component {
     }
     return (
       <View style={{flex: 1}}>
+        <Image style={styles.bgImageStyle} source={bg} />
         <View style={{paddingTop: 25, paddingBottom: 20}}>
         <View style={styles.borderTop}>
         <Text style={{alignContent: 'center', fontSize: 30, color:'white', fontWeight:'700'}}>Booking</Text></View>
@@ -79,14 +84,14 @@ class Booking extends React.Component {
           </View>
 
         <View style={{top: 100, alignItems: 'center'}}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.buttonPayment}
             onPress={() => navigation.navigate(PAYMENT_SCREEN)}>
             <Text style={{fontSize: 18, fontWeight:'bold', color:'white' }}>Payment</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.buttonBack}
-            onPress={() => navigation.goBack()}>
+            onPress={() => navigation.navigate(screenNames.LOGIN_FORM)}>
             <Text style={{fontWeight:'bold' ,fontSize: 18, color:'#FF9800'}}>Back</Text>
           </TouchableOpacity>
         </View>
@@ -106,6 +111,16 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     marginRight: 10
   },
+  bgImageStyle: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+
+},
   borderTop:{
     width: 200, 
     height: 50, 
